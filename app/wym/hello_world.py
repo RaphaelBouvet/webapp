@@ -1,4 +1,4 @@
-import pandas as pd
+import requests as rq
 print('Hello Kebab')
-print(pd.__version__)
+print(rq.__version__)
 

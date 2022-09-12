@@ -4,7 +4,7 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 port = 5050
 
-@app.route('/home')
+@app.route('/')
 def home():
     return render_template('home.html', title='HOME')
 

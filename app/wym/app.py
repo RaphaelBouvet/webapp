@@ -1,6 +1,4 @@
-from distutils.log import debug
-from turtle import title
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 
 app = Flask(__name__)
@@ -14,6 +12,14 @@ def about():
 def contact():
     return render_template('contact.html')
 
+@app.route('/model',  methods= ['POST', 'GET'])
+def model():
+    if request.method == 'GET':
+        return render_template('model.html')
+    elif request.method == 'POST':
+        text_input = request.form
+        print(text_input)
+        return render_template('model.html')
 
 if __name__ == '__main__':
     app.run(debug=True, port=port)

@@ -3,6 +3,7 @@ from model_utils import summarize
 
 app = Flask(__name__)
 port = 5050
+host = '0.0.0.0'
 
 @app.route('/')
 def home():
@@ -27,4 +28,4 @@ def model():
         return render_template('model_serve.html', summary = text_output[0])
 
 if __name__ == '__main__':
-    app.run(debug=True, port=port)
+    app.run(debug=True, host=host, port=port)

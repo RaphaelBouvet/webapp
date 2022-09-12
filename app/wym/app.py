@@ -17,6 +17,10 @@ def about():
 def contact():
     return render_template('contact.html')
 
+@app.route('/contacted')
+def contact():
+    return render_template('contacted.html')
+
 @app.route('/model',  methods= ['POST', 'GET'])
 def model():
     if request.method == 'GET':

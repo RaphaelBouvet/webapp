@@ -19,7 +19,7 @@ def model():
     elif request.method == 'POST':
         text_input = request.form
         print(text_input)
-        return render_template('model.html')
+        return render_template('model_serve.html', summary = text_input)
 
 if __name__ == '__main__':
     app.run(debug=True, port=port)

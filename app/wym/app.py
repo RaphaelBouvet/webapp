@@ -18,7 +18,7 @@ def contact():
     return render_template('contact.html')
 
 @app.route('/contacted')
-def contact():
+def contacted():
     return render_template('contacted.html')
 
 @app.route('/model',  methods= ['POST', 'GET'])

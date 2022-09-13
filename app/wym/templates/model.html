@@ -4,18 +4,21 @@
 
 {% include 'base.html' %}
 
-<body style="background-color:azure;">
+<body>
 
-<h1 style="color:brown ; text-align: center ;"> Do you want to cheat ?  </h1>
-<p> The super summarizer is able to summarise text including Wikipedia :) </p>
+<h1 text-align: center ;"> Do you want to cheat ?  </h1>
+<p> The super summarizer is able to summarise text including Wikipedia :) 
 
-<label for="name">Name:</label>
+    Please enter your text below
+    <br>
+<textarea rows="4" cols="50" name="comment" form="usrform">
+Enter text here...
+</textarea>
 
-<form action="/model", method="POST">
-    <p> Please enter your text below </p>
-    <p> <input type='text' name="texte"/> </p>
+<form action="/model", method="POST", id="usrform">
     <p> <input type = "submit" value = "Submit" /></p>
 </form>
 
+</p>
 </body>
 </html>

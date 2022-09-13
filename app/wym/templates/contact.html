@@ -4,12 +4,10 @@
 
 {% include 'base.html' %}
 
-<body style="background-color:azure;">
+<body">
 
-<h1 style="color:brown ; text-align: center ;"> Want to express your self ?  </h1>
-<form id = "contact" method = "post" action = "/contacted">
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required minlength="1" maxlength="50" size="15">
+<h1 style="text-align: center;"> Please send us a message to help ameliorate the website  </h1>
+<form id = "contact" method = "post" action = "/contacted"></form>
 
     <label for="mail">E-mail:</label>
     <input type="text" id="mail" name="mail" required minlength="5" maxlength="50" size="15">

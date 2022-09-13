@@ -7,24 +7,23 @@
 <body style="background-color:azure;">
 
 <h1 style="color:brown ; text-align: center ;"> Want to express your self ?  </h1>
+<form id = "contact" method = "post" action = "/contacted">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required minlength="1" maxlength="50" size="15">
 
-<label for="name">Name:</label>
-<input type="text" id="name" name="name" required minlength="1" maxlength="50" size="15">
+    <label for="mail">E-mail:</label>
+    <input type="text" id="mail" name="mail" required minlength="5" maxlength="50" size="15">
 
-<label for="mail">E-mail:</label>
-<input type="text" id="mail" name="mail" required minlength="5" maxlength="50" size="15">
+    <label for="phone">Phone:</label>
+    <input type="text" id="phone" name="phone" required minlength="0" maxlength="12" size="12"> 
 
-<label for="phone">Phone:</label>
-<input type="text" id="phone" name="phone" required minlength="0" maxlength="12" size="12"> 
 
-<p></p>
+    <label for="story">Tell us your comment:</label>
 
-<label for="story">Tell us your comment:</label>
-
-<textarea id="comment" name="comment"
-          rows="5" cols="33">
-Texte zone...
-</textarea>
-
+    <textarea id="comment" name="comment" rows="5" cols="33">
+        Texte zone...
+    </textarea>
+    <input type = "submit" name="Submit">
+</form>
 </body>
 </html>

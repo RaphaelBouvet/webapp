@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from model_utils import summarize
+from db_utils import connexion_db, insert_into_table, create_db
 
 app = Flask(__name__)
 port = 5050
@@ -17,9 +18,21 @@ def about():
 def contact():
     return render_template('contact.html')
 
-@app.route('/contacted')
+@app.route('/contacted',  methods= ['POST'])
 def contacted():
-    return render_template('contacted.html')
+    if request.method == 'POST':
+        form = request.form
+        result_form = []
+        result_form.append(form['name'])
+        result_form.append(form['mail'])
+        result_form.append(form['phone'])
+        result_form.append(form['comment'])
+        print(result_form)
+
+        curs = connexion_db()
+        create_db(curs, "app_v_r_d")
+        insert_into_table(curs, result_form)
+        return render_template('contacted.html', result=result_form[0])
 
 @app.route('/model',  methods= ['POST', 'GET'])
 def model():

@@ -2,6 +2,7 @@ import psycopg2
 
 def connexion_db():
     host = '172.17.0.2'
+    #host = "localhost"
     user = 'virginie'
     passwd = 'mysecretpassword'
 
@@ -24,8 +25,8 @@ def create_db(cursor, db) :
         query = "CREATE DATABASE " + db + ";"
         cursor.execute(query)
 
-        query = "CREATE TABLE contact (id SERIAL PRIMARY KEY, name varchar(50), email varchar(50), phone varchar(50), message TEXT );"
-        cursor.execute(query)
+    query_table = "CREATE TABLE IF NOT EXISTS contact (id SERIAL PRIMARY KEY, name varchar(50), email varchar(50), phone varchar(50), message TEXT );"
+    cursor.execute(query_table)
 
 def test_table(cursor, db):
     query = "SELECT * FROM contact ;"
@@ -46,9 +47,9 @@ def insert_into_table(cursor, data):
     cursor.execute(query)
 
 if __name__ == '__main__':
-    data = ['virginie', 'virginie@yopmail.com', '09*******', 'ohbvjhdbvjz::::']
+    #data = ['virginie', 'virginie@yopmail.com', '09*******', 'ohbvjhdbvjz::::']
     cursor = connexion_db()
     create_db(cursor, "app_v_r_d")
-    test_table(cursor, "app_v_r_d")
-    insert_into_table(cursor, data)
+    # test_table(cursor, "app_v_r_d")
+    # insert_into_table(cursor, data)
     # remove_database(cursor, "app_v_r_d")

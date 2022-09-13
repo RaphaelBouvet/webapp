@@ -7,19 +7,21 @@
 <body">
 
 <h1 style="text-align: center;"> Please send us a message to help ameliorate the website  </h1>
-<form id = "contact" method = "post" action = "/contacted"></form>
+<form id = "contact" method = "post" action = "/contacted">
+
+    <label for="mail">Name:</label>
+    <input type="text" id="name" name="name">
 
     <label for="mail">E-mail:</label>
-    <input type="text" id="mail" name="mail" required minlength="5" maxlength="50" size="15">
+    <input type="text" id="mail" name="mail">
 
     <label for="phone">Phone:</label>
-    <input type="text" id="phone" name="phone" required minlength="0" maxlength="12" size="12"> 
+    <input type="text" id="phone" name="phone"> 
 
 
     <label for="story">Tell us your comment:</label>
 
     <textarea id="comment" name="comment" rows="5" cols="33">
-        Texte zone...
     </textarea>
     <input type = "submit" name="Submit">
 </form>

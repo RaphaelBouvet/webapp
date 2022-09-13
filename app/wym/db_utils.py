@@ -1,7 +1,7 @@
 import psycopg2
 
 def connexion_db():
-    host = '172.17.0.2'
+    host = 'db'
     #host = "localhost"
     user = 'virginie'
     passwd = 'mysecretpassword'

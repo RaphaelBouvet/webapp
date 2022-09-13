@@ -9,4 +9,9 @@ services:
     image: codait/max-text-summarizer
     ports:
       - 5000:5000
-    
+  
+  # db:
+  #   image: nom de l'image
+  #   ports:
+  #     - portmachine:portcontainer
+  #   et normalement tout fonctionne si le nom du service est mis dans le script db_utilis.py

@@ -1,6 +1,6 @@
 import requests
 
-base_url = 'http://0.0.0.0:5000/model/predict'
+base_url = 'http://model:5000/model/predict'
 test_json = {
   "text": [
     "string"

@@ -11,9 +11,8 @@ class User(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String)
     mail = Column(String)
-    comment = Column(String)
     phone = Column(String)
-
+    comment = Column(String)
 
 def get_engine():
     return create_engine('postgresql+psycopg2://test:testpassword@172.17.0.2/website', echo=True)
@@ -26,25 +25,12 @@ def verify_database():
     else:
         print('Database already exists')
 
-def get_session(engine):
+def get_session():
+    engine = get_engine()
     Session = sessionmaker()
-    Session.configure(bing=engine)
+    Session.configure(bind=engine)
     return Session()
 
 if __name__ == '__main__':
     verify_database()
     engine = get_engine()
-    
-
-    Base.metadata.create_all(engine)
-
-
-    # create table contact
-
-    # test binding user 
-
-    test_user = User(name='raph', mail='ra@bou.fr', comment='Great!')
-
-    session.add(test_user)
-
-    session.commit()

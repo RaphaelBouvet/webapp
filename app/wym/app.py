@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 from model_utils import summarize
 from db_utils import connexion_db, insert_into_table, create_db
 
-from db_utils_2 import User, get_session, verify_database, fetch_db
+from db_utils_2 import User, get_session, verify_database, fetch_db, insert_db
 
 app = Flask(__name__)
 port = 5050
@@ -20,33 +20,14 @@ def about():
 def contact():
     return render_template('contact.html')
 
-# @app.route('/contacted',  methods= ['POST'])
-# def contacted():
-#     if request.method == 'POST':
-#         form = request.form
-#         result_form = []
-#         result_form.append(form['name'])
-#         result_form.append(form['mail'])
-#         result_form.append(form['phone'])
-#         result_form.append(form['comment'])
-#         print(result_form)
-
-#         curs = connexion_db()
-#         create_db(curs, "app_v_r_d")
-#         insert_into_table(curs, result_form)
-#         return render_template('contacted.html', result=result_form[0])
-
 @app.route('/contacted', methods=['POST'])
 def contacted():
     if request.method == 'POST':
         user_data = request.form
         print(f'User_data :{user_data}')
-        user = User(**user_data)
-        session = get_session()
-        session.add(user)
-        session.commit()
-        session.close()
-        return render_template('contacted.html', result=user.name)
+        print(type(user_data))
+        insert_db('User', user_data)
+        return render_template('contacted.html', result=user_data["name"])
 
 @app.route('/model',  methods= ['POST', 'GET'])
 def model():
@@ -56,7 +37,9 @@ def model():
         text_input = request.form['texte']
         print(f'TEXT INPUT {text_input}')
         text_output = summarize(text_input)
-        return render_template('model_serve.html', summary = text_output[0])
+        text_data = {"input_text":text_input, "output_text":text_output}
+        insert_db('Text_Summ', text_data)
+        return render_template('model_serve.html', summary = text_output)
 
 if __name__ == '__main__':
     verify_database()

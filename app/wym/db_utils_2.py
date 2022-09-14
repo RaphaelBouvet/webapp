@@ -1,5 +1,6 @@
+from datetime import datetime
 from sqlalchemy import create_engine
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, DateTime
 from sqlalchemy.orm import sessionmaker, declarative_base
 from sqlalchemy_utils import database_exists, create_database
 
@@ -15,6 +16,14 @@ class User(Base):
     mail = Column(String)
     phone = Column(String)
     comment = Column(String)
+
+class Text_Summ(Base):
+    __tablename__ = 'text_summarize'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    input_text = Column(String)
+    output_text = Column(String)
+    time = Column(DateTime)
 
 def get_engine():
     return create_engine('postgresql+psycopg2://virginie:mysecretpassword@db:5432/app_v_r_d', echo=True)
@@ -34,10 +43,21 @@ def get_session():
     Session.configure(bind=engine)
     return Session()
 
-def fetch_db():
+def fetch_db(db):
     session = get_session()
-    contact = session.query(User)
+    contact = session.query(db)
     return contact
+
+def insert_db(db, list_params):
+    if db == "User":
+        db_obj = User(**list_params)
+    elif db == "Text_Summ":
+        db_obj = Text_Summ(**list_params)
+        
+    session = get_session()
+    session.add(db_obj)
+    session.commit()
+    session.close()
 
 engine = get_engine()
 Base.metadata.create_all(engine)

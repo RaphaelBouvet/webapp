@@ -31,6 +31,11 @@ def get_session():
     Session.configure(bind=engine)
     return Session()
 
+def fetch_db():
+    session = get_session()
+    contact = session.query(User)
+    return contact
+
 if __name__ == '__main__':
     verify_database()
     engine = get_engine()

@@ -14,7 +14,11 @@ def summarize(text:str):
     r = requests.post(
         url = base_url,
         json = json
-    ).json()
+    )
+    print(f'Time taken {r.elapsed.total_seconds()}')
+    time = r.elapsed.total_seconds()
+    print(type(time))
+    r = r.json()
     print(f'Response {r}')
     if r['status'] == 200:
       print(r['summary_text'])
@@ -23,7 +27,7 @@ def summarize(text:str):
       summary = 'BAD REQUEST'
 
     summary = r['summary_text']
-    return summary
+    return summary, time
 
 if __name__ == '__main__':
     print('Test de Requests et text summary')

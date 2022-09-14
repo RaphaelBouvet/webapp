@@ -1,8 +1,7 @@
 from flask import Flask, render_template, request
 from model_utils import summarize
-from db_utils import connexion_db, insert_into_table, create_db
-
 from db_utils_2 import User, get_session, verify_database, fetch_db, insert_db
+import datetime
 
 app = Flask(__name__)
 port = 5050
@@ -36,8 +35,11 @@ def model():
     elif request.method == 'POST':
         text_input = request.form['texte']
         print(f'TEXT INPUT {text_input}')
-        text_output = summarize(text_input)
-        text_data = {"input_text":text_input, "output_text":text_output}
+        text_output, time = summarize(text_input)
+        text_data = {
+            "input_text" : text_input, 
+            "output_text" : text_output,
+            "time" : time}
         insert_db('Text_Summ', text_data)
         return render_template('model_serve.html', summary = text_output)
 

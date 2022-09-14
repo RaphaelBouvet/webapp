@@ -1,6 +1,6 @@
 from datetime import datetime
 from sqlalchemy import create_engine
-from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy import Column, Integer, String, DateTime, Float
 from sqlalchemy.orm import sessionmaker, declarative_base
 from sqlalchemy_utils import database_exists, create_database
 
@@ -23,7 +23,7 @@ class Text_Summ(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     input_text = Column(String)
     output_text = Column(String)
-    time = Column(DateTime)
+    time = Column(Float)
 
 def get_engine():
     return create_engine('postgresql+psycopg2://virginie:mysecretpassword@db:5432/app_v_r_d', echo=True)

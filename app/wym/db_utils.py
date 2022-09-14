@@ -1,4 +1,4 @@
-import psycopg2
+import psycopg2, sqlalchemy
 
 def connexion_db():
     host = 'db'

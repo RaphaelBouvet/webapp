@@ -6,11 +6,13 @@
 
 <body>
 
-<h1 text-align: center ;"> Do you want to cheat ?  </h1>
-<p> The super summarizer is able to summarise text including Wikipedia :) 
-
-    Please enter your text below
-    <br>
+    <div class = "position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center">
+        <h1 class = "display-4 fw-normal">Do you want to cheat ?</h1>
+    
+        <p class = "lead fw-normal"> The super summarizer is able to summarise text including Wikipedia :) 
+            <br>
+    Please enter your text below :
+    <br><br>
 <textarea rows="4" cols="50" name="texte" form="usrform">
 Enter text here...
 </textarea>
@@ -18,7 +20,6 @@ Enter text here...
 <form action="/model", method="POST", id="usrform">
     <p> <input type = "submit" value = "Submit" /></p>
 </form>
-
-</p>
+</div>
 </body>
 </html>

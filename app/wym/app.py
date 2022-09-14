@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 from model_utils import summarize
 from db_utils import connexion_db, insert_into_table, create_db
 
-from db_utils_2 import User, get_session, verify_database
+from db_utils_2 import User, get_session, verify_database, fetch_db
 
 app = Flask(__name__)
 port = 5050

@@ -6,24 +6,32 @@
 
 <body">
 
-<h1 style="text-align: center;"> Please send us a message to help ameliorate the website  </h1>
-<form id = "contact" method = "post" action = "/contacted">
+<h1 style="text-align: center;"> Contact us  </h1>
 
-    <label for="mail">Name:</label>
-    <input type="text" id="name" name="name">
+<div class = "text-bg-dark me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+    <div class = "my-3 py-3">
+        <h2 class = "display-5">Please send us a message to help ameliorate our website</h2>
+    </div>
+    <div class = "bg-light shadow-sm mx-auto" style = "width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
+        <form id = "contact" method = "post" action = "/contacted">
+            <label for="mail">Name:</label>
+            <input type="text" id="name" name="name">
+            <br>
+            <label for="mail">E-mail:</label>
+            <input type="text" id="mail" name="mail">
+            <br>
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone" name="phone"> 
+            <br>
+            <label for="story">Tell us your comment:</label>
+            <textarea id="comment" name="comment" rows="5" cols="33">
+            </textarea>
+            <br>
+            <input type = "submit" name="Submit">
+        </form>
+    </div>
+</div>
+    
 
-    <label for="mail">E-mail:</label>
-    <input type="text" id="mail" name="mail">
-
-    <label for="phone">Phone:</label>
-    <input type="text" id="phone" name="phone"> 
-
-
-    <label for="story">Tell us your comment:</label>
-
-    <textarea id="comment" name="comment" rows="5" cols="33">
-    </textarea>
-    <input type = "submit" name="Submit">
-</form>
 </body>
 </html>

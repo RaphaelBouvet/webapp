@@ -6,6 +6,9 @@ services:
       - 5050:5050
     volumes:
       - ./app/wym:/app/
+    depends_on:
+      - model
+      - db 
   
   model:
     image: codait/max-text-summarizer

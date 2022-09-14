@@ -45,6 +45,7 @@ def contacted():
         session = get_session()
         session.add(user)
         session.commit()
+        session.close()
         return render_template('contacted.html', result=user.name)
 
 @app.route('/model',  methods= ['POST', 'GET'])

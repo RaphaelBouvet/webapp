@@ -6,15 +6,16 @@
 
 <body style="background-color:azure;">
 
-<h1 style="color:brown ; text-align: center ;"> Do you want to cheat ?  </h1>
-<p> The super summarizer is able to summarise text including Wikipedia :) </p>
-<p> Summary of your text : {{ summary }} </p>
+    <div class = "position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center">
+        <h1 class = "display-4 fw-normal">Do you want to cheat ?  </h1>
 
-<p></p>
+        <p class = "lead fw-normal"> The super summarizer is able to summarise text including Wikipedia :) </p><br/>
+        <p> Summary of your text : {{ summary }} </p>
+
+    </div>
 
 <form action="/model", method="GET">
-    <p> Return to text input </p>
-    <p> <input type = "submit" value = "Return" /></p>
+    <p> <input type = "submit" value = "Return to text Input" /></p>
 </form>
 
 </body>

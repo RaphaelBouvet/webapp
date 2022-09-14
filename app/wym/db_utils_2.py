@@ -1,4 +1,3 @@
-from datetime import datetime
 from sqlalchemy import create_engine
 from sqlalchemy import Column, Integer, String, DateTime, Float
 from sqlalchemy.orm import sessionmaker, declarative_base

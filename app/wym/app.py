@@ -1,8 +1,7 @@
-from re import template
 from flask import Flask, render_template, request
 from model_utils import summarize
 from db_utils_2 import User, get_session, verify_database, fetch_db, insert_db, get_db
-import datetime
+import matplotlib.pyplot as plt
 
 app = Flask(__name__)
 port = 5050

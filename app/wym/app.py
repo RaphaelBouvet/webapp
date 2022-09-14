@@ -1,6 +1,7 @@
+from re import template
 from flask import Flask, render_template, request
 from model_utils import summarize
-from db_utils_2 import User, get_session, verify_database, fetch_db, insert_db
+from db_utils_2 import User, get_session, verify_database, fetch_db, insert_db, get_db
 import datetime
 
 app = Flask(__name__)
@@ -42,6 +43,15 @@ def model():
             "time" : time}
         insert_db('Text_Summ', text_data)
         return render_template('model_serve.html', summary = text_output)
+
+@app.route('/dash')
+def dash():
+    query = get_db()
+    mean_time = 0 
+    for q in query:
+        mean_time += q.time
+    mean_time /= len(query)
+    return render_template('dash.html', model_param=mean_time)
 
 if __name__ == '__main__':
     verify_database()

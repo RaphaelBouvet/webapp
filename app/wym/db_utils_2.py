@@ -58,6 +58,11 @@ def insert_db(db, list_params):
     session.commit()
     session.close()
 
+def get_db():
+    session = get_session()
+    query = session.query(Text_Summ).all()
+    return query
+
 engine = get_engine()
 Base.metadata.create_all(engine)
 

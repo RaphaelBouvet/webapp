@@ -1,15 +1,62 @@
-from email.policy import default
-from sqlalchemy import create_engine
-from sqlalchemy import Column, Integer, String, DateTime, Float
-from sqlalchemy.orm import sessionmaker, declarative_base
-from sqlalchemy_utils import database_exists, create_database
+import datetime
+
+from sqlalchemy import (
+    create_engine,
+    Column, Integer, String, Float, DateTime
+)
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy_utils import database_exists, create_database, drop_database
 from sqlalchemy.sql import func
 
-import psycopg2
+
+class PGSQL_DB(object):
+    def __init__(self, user='virginie', password='mysecretpassword', host='db', port=5432):
+        self.user = user
+        self.password = password
+        self.host = host
+        self.port = port
+        # default database:
+        self.db = 'app_v_r_d'
+        self.base_url = f"postgresql+psycopg2://{self.user}:{self.password}@{self.host}:{self.port}/"
+
+        self.engine = None
+
+    def connect_to_default_db(self):
+        url = self.base_url + self.db
+        self.engine = create_engine(url, client_encoding='utf8', echo=True)
+        print(database_exists(self.engine.url))
+        return self.engine
+
+    def connect_to_db(self, db_name):
+        url = self.base_url + db_name
+        self.engine = create_engine(url, client_encoding='utf8', echo=True)
+
+        if not database_exists(self.engine.url):
+            create_database(self.engine.url)
+
+        if database_exists(self.engine.url):
+            return self.engine
+        else:
+            raise Exception(f"Could not connect to {db_name!r} (database doesn't exist)")
+
+    def delete_db(self, db_name):
+        url = self.base_url + db_name
+
+        self.engine = create_engine(url, client_encoding='utf8', echo=True)
+        if database_exists(self.engine.url):
+            drop_database(self.engine.url)
+
+        print(database_exists(self.engine.url))
+
+    def get_table(self, table_name=None):
+        session = sessionmaker(bind=self.engine)
+        with session.begin() as session:
+            query = session.query(Text_Summ).all()
+            session.expunge_all()
+        return query
 
 Base = declarative_base()
-
-
 class Text_Summ(Base):
     __tablename__ = 'text_summarize'
 
@@ -19,45 +66,3 @@ class Text_Summ(Base):
     date_request = Column(DateTime, server_default=func.now())
     time_treated = Column(Float)
 
-def get_engine():
-    return create_engine('postgresql+psycopg2://virginie:mysecretpassword@db:5432/app_v_r_d', echo=True)
-
-def verify_database():
-    engine = get_engine()
-    if not database_exists(engine.url):
-        print('Creating Database')
-        create_database(engine.url)
-        Base.metadata.create_all(engine)
-    else:
-        print('Database already exists')
-
-def get_session():
-    engine = get_engine()
-    Session = sessionmaker()
-    Session.configure(bind=engine)
-    return Session()
-
-def fetch_db(db):
-    session = get_session()
-    db_data = session.query(db).all
-    return db_data
-
-def insert_db(db, list_params):
-    if db == "User":
-        db_obj = User(**list_params)
-    elif db == "Text_Summ":
-        db_obj = Text_Summ(**list_params)
-        
-    session = get_session()
-    session.add(db_obj)
-    session.commit()
-    session.close()
-
-
-verify_database()
-engine = get_engine()
-Base.metadata.create_all(engine)
-
-if __name__ == '__main__':
-    verify_database()
-    engine = get_engine()

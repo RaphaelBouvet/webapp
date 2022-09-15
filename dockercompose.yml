@@ -1,0 +1,43 @@
+
+services:
+  app:
+    image: fdac90/webapp_app:latest
+    ports:
+      - 5050:5050
+    volumes:
+      - ./app/wym:/app/
+    depends_on:
+      - model
+      - db 
+    restart: on-failure
+  
+  model:
+    image: codait/max-text-summarizer
+    ports:
+      - 5000:5000
+    
+  db:
+    image: postgres
+    ports:
+      - 5432:5432 
+    volumes: 
+      - db_data:/var/lib/postgres/data
+    environment: 
+      PGDATA: /var/lib/postgres/data 
+      POSTGRES_USER: virginie
+      POSTGRES_PASSWORD: mysecretpassword
+  
+  dash:
+    image: fdac90/webapp_dash:latest
+    ports:
+      - 8001:8501
+    volumes:
+      - ./monitoring:/monitoring/
+
+  mario:
+    image: pengbai/docker-supermario
+    ports:
+      - 8600:8080
+    
+volumes:
+  db_data:

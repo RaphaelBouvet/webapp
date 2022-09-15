@@ -13,19 +13,25 @@ table_data = pd.read_sql_table(
     con = mydb.engine,
     index_col='id'
 )
+# preprocessing input text 
+
+def remove_stuff(string):
+    return ''.join(e for e in string if e.isalnum() or e ==' ')
+table_data['input_text'] = table_data['input_text'].str.lower().str.replace('\n','').apply(remove_stuff)
+st.dataframe(table_data)
 table_data = table_data[['date_request','time_treated','input_text','output_text']]
 table_data_ts = table_data.set_index(pd.to_datetime(table_data['date_request']))
 
-mean_inf_time = table_data['time_treated'].mean()
-mean_input_len = (table_data['input_text'].apply(len)).mean()
 
 st.title('Dashboard of model utilisation')
 
 st.header('Performance')
+mean_inf_time = table_data['time_treated'].mean()
+mean_input_len = (table_data['input_text'].apply(len)).mean()
 st.write(f'Mean processing time : {mean_inf_time:.2f}s')
 st.write(f'Mean input len : {mean_input_len:.0f} char')
 
-st.header('Plots')
+st.header('Plots',)
 fig, ax = plt.subplots()
 table_data['time_treated'].hist(ax=ax)
 ax.set_title('Distribution of model inference time')

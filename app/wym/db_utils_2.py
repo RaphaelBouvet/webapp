@@ -1,7 +1,9 @@
+from email.policy import default
 from sqlalchemy import create_engine
 from sqlalchemy import Column, Integer, String, DateTime, Float
 from sqlalchemy.orm import sessionmaker, declarative_base
 from sqlalchemy_utils import database_exists, create_database
+from sqlalchemy.sql import func
 
 import psycopg2
 
@@ -22,7 +24,8 @@ class Text_Summ(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     input_text = Column(String)
     output_text = Column(String)
-    time = Column(Float)
+    date_request = Column(DateTime, server_default=func.now())
+    time_treated = Column(Float)
 
 def get_engine():
     return create_engine('postgresql+psycopg2://virginie:mysecretpassword@db:5432/app_v_r_d', echo=True)
@@ -63,6 +66,7 @@ def get_db():
     query = session.query(Text_Summ).all()
     return query
 
+verify_database()
 engine = get_engine()
 Base.metadata.create_all(engine)
 

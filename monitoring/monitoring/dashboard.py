@@ -23,7 +23,7 @@ st.title('Dashboard of model utilisation')
 
 st.header('Performance')
 st.write(f'Mean processing time : {mean_inf_time:.2f}s')
-st.write(f'Mean input len : {mean_input_len:.0f} words')
+st.write(f'Mean input len : {mean_input_len:.0f} char')
 
 st.header('Plots')
 fig, ax = plt.subplots()

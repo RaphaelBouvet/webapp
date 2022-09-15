@@ -1,4 +1,3 @@
-from nis import match
 import streamlit as st
 from db_utils import PGSQL_DB
 import pandas as pd
@@ -53,6 +52,6 @@ st.pyplot(fig=fig)
 st.header('Raw Data')
 st.dataframe(data=table_data)
 
-surprise = st.button(label='Surprise')
-if surprise:
+surprise = st.button(label='Ne pas toucher debug only')
+if surprise: 
     st.snow()

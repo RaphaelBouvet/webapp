@@ -1,3 +1,4 @@
+from nis import match
 import streamlit as st
 from db_utils import PGSQL_DB
 import pandas as pd
@@ -13,8 +14,8 @@ table_data = pd.read_sql_table(
     con = mydb.engine,
     index_col='id'
 )
-
 table_data = table_data[['date_request','time_treated','input_text','output_text']]
+table_data_ts = table_data.set_index(pd.to_datetime(table_data['date_request']))
 
 mean_inf_time = table_data['time_treated'].mean()
 mean_input_len = (table_data['input_text'].apply(len)).mean()
@@ -30,7 +31,13 @@ fig, ax = plt.subplots()
 ax = table_data['time_treated'].hist(ax=ax)
 st.pyplot(fig=fig)
 
+st.header('Number of request by selected sampling time')
+dict_options = {'by day':'1D', 'by hour':'1H', 'by minute':'60S'}
+choice = st.radio('Select Time Frame', options=dict_options.keys())
+table_data_ts = table_data_ts.resample(dict_options[choice]).count()
+fig, ax = plt.subplots()
+ax = table_data_ts['time_treated'].hist(ax=ax)
+st.dataframe(data=table_data_ts)
+
 st.header('Raw Data')
 st.dataframe(data=table_data)
-
-st.snow()

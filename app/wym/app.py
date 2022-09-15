@@ -6,7 +6,7 @@ import datetime
 import time
 
 app = Flask(__name__)
-port = 5051
+port = 5050
 host = '0.0.0.0'
 
 @app.route('/')

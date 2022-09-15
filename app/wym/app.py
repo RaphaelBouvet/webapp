@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from model_utils import summarize
 from db_utils_2 import User, get_session, verify_database, fetch_db, insert_db, get_db
 import matplotlib.pyplot as plt
@@ -52,12 +52,7 @@ def mario():
 
 @app.route('/dash')
 def dash():
-    query = get_db()
-    mean_time = 0 
-    for q in query:
-        mean_time += q.time
-    mean_time /= len(query)
-    return render_template('dash.html', model_param=mean_time)
+    return redirect('http://localhost:8001')
 
 
 if __name__ == '__main__':

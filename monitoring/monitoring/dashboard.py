@@ -42,13 +42,29 @@ st.pyplot(fig=fig)
 st.dataframe(data=table_data_ts)
 
 st.header('Model performance by input lenght')
-len = table_data['input_text'].apply(len)
+len_input = table_data['input_text'].apply(len)
+len_output = table_data['output_text'].apply(len)
 fig, ax = plt.subplots()
-ax.scatter(x= len.values, y= table_data['time_treated'].values)
+ax.scatter(x= len_input.values, y= table_data['time_treated'].values)
 ax.set_ylabel('Inference time(sec)')
 ax.set_xlabel('Text Input Len')
 st.pyplot(fig=fig)
 
+# Graphique Distribution de la longueur du texte à résumer : 
+st.header('Distribution of length Input texte')
+fig, ax = plt.subplots()
+len_output.hist(ax=ax, bins=50)
+ax.set_title('Distribution of length Input texte')
+st.pyplot(fig=fig)
+
+# Graphique Comparaison de la longueur du texte à résumer vs la longueur du texte résumé : 
+st.header('Length Input Text VS Output Text')
+fig, ax = plt.subplots()
+ax.scatter(x= len_input.values, y= len_output.values)
+ax.set_ylabel('Length Output Text')
+ax.set_xlabel('Length Input Text')
+ax.set_title('Length Input Text VS Output Text')
+st.pyplot(fig=fig)
 st.header('Raw Data')
 st.dataframe(data=table_data)
 

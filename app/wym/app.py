@@ -4,7 +4,7 @@ from db_utils_2 import User, get_session, verify_database, fetch_db, insert_db, 
 import matplotlib.pyplot as plt
 
 app = Flask(__name__)
-port = 5050
+port = 5051
 host = '0.0.0.0'
 
 @app.route('/')
@@ -43,6 +43,11 @@ def model():
         insert_db('Text_Summ', text_data)
         return render_template('model_serve.html', summary = text_output)
 
+@app.route('/mario')
+def mario():
+    iframe="http://127.0.0.1:8600/"
+    return render_template('mario.html', iframe=iframe)
+
 @app.route('/dash')
 def dash():
     query = get_db()
@@ -51,6 +56,7 @@ def dash():
         mean_time += q.time
     mean_time /= len(query)
     return render_template('dash.html', model_param=mean_time)
+
 
 if __name__ == '__main__':
     verify_database()

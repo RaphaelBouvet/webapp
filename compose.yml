@@ -9,6 +9,7 @@ services:
     depends_on:
       - model
       - db 
+    
   
   model:
     image: codait/max-text-summarizer
@@ -33,6 +34,11 @@ services:
       - 8001:8501
     volumes:
       - ./monitoring:/monitoring/
-      
+
+  mario:
+    image: pengbai/docker-supermario
+    ports:
+      - 8600:8080
+    
 volumes:
   db_data:

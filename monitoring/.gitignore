@@ -1,2 +1,3 @@
 secrets.toml
 .venv
+monitoring/__pycache__

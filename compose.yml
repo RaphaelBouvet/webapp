@@ -26,6 +26,13 @@ services:
       PGDATA: /var/lib/postgres/data 
       POSTGRES_USER: virginie
       POSTGRES_PASSWORD: mysecretpassword
+  
+  dash:
+    image: streamlitapp:latest
+    ports:
+      - 8001:8501
+    volumes:
+      - ./monitoring:/monitoring/
       
 volumes:
   db_data:

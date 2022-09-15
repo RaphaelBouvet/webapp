@@ -28,7 +28,8 @@ st.write(f'Mean input len : {mean_input_len:.0f} words')
 
 st.header('Plots')
 fig, ax = plt.subplots()
-ax = table_data['time_treated'].hist(ax=ax)
+table_data['time_treated'].hist(ax=ax)
+ax.set_title('Distribution of model inference time')
 st.pyplot(fig=fig)
 
 st.header('Number of request by selected sampling time')
@@ -36,8 +37,14 @@ dict_options = {'by day':'1D', 'by hour':'1H', 'by minute':'60S'}
 choice = st.radio('Select Time Frame', options=dict_options.keys())
 table_data_ts = table_data_ts.resample(dict_options[choice]).count()
 fig, ax = plt.subplots()
-ax = table_data_ts['time_treated'].hist(ax=ax)
+table_data_ts['time_treated'].plot(ax=ax)
+ax.set_ylabel(f'Number of model requests {choice}')
+st.pyplot(fig=fig)
 st.dataframe(data=table_data_ts)
 
 st.header('Raw Data')
 st.dataframe(data=table_data)
+
+surprise = st.button(label='Surprise')
+if surprise:
+    st.snow()

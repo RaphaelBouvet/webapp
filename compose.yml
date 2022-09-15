@@ -28,7 +28,7 @@ services:
       POSTGRES_PASSWORD: mysecretpassword
   
   dash:
-    image: streamlitapp:latest
+    build: ./monitoring/
     ports:
       - 8001:8501
     volumes:

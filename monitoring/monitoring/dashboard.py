@@ -42,6 +42,14 @@ ax.set_ylabel(f'Number of model requests {choice}')
 st.pyplot(fig=fig)
 st.dataframe(data=table_data_ts)
 
+st.header('Model performance by input lenght')
+len = table_data['input_text'].apply(len)
+fig, ax = plt.subplots()
+ax.scatter(x= len.values, y= table_data['time_treated'].values)
+ax.set_ylabel('Inference time(sec)')
+ax.set_xlabel('Text Input Len')
+st.pyplot(fig=fig)
+
 st.header('Raw Data')
 st.dataframe(data=table_data)
 

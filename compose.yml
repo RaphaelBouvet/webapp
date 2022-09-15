@@ -9,7 +9,7 @@ services:
     depends_on:
       - model
       - db 
-    
+    restart: on-failure
   
   model:
     image: codait/max-text-summarizer

@@ -2,6 +2,8 @@ from flask import Flask, render_template, request
 from model_utils import summarize
 from db_utils_2 import User, get_session, verify_database, fetch_db, insert_db, get_db
 import matplotlib.pyplot as plt
+import datetime
+import time
 
 app = Flask(__name__)
 port = 5051
@@ -35,11 +37,11 @@ def model():
     elif request.method == 'POST':
         text_input = request.form['texte']
         print(f'TEXT INPUT {text_input}')
-        text_output, time = summarize(text_input)
+        text_output, time_treated = summarize(text_input)
         text_data = {
             "input_text" : text_input, 
             "output_text" : text_output,
-            "time" : time}
+            "time_treated" : time_treated}
         insert_db('Text_Summ', text_data)
         return render_template('model_serve.html', summary = text_output)
 
